@@ -47,14 +47,14 @@ ah 51
 string=$1
 size=${#string}
 echo -n "+"
-for ((i=-1;i<size;i++))
+for ((i=-2;i<size;i++))
 do
 echo -n "-"
 done
 echo "+"
 echo "| $string |"
 echo -n "+"
-for ((i=-1;i<size;i++))
+for ((i=-2;i<size;i++))
 do
 echo -n "-"
 done
@@ -62,8 +62,8 @@ echo "+"
 ```
 
 ```
-$ ./task3 "Hello Mirea"
-+------------+
-| Hello Mirea |
-+------------+
+$ ./task3 "hello mirea"
++-------------+
+| hello mirea |
++-------------+
 ```
