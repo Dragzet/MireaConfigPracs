@@ -67,3 +67,56 @@ $ ./task3 "hello mirea"
 | hello mirea |
 +-------------+
 ```
+
+### Задача 4
+
+***grep -o*** - поиск строк по заданному шаблону
+
+```
+$ cat main.cpp | grep -o '\b[a-zA-Z_][a-zA-Z0-9_]*\b' | sort | uniq
+Close
+Create
+Files
+MyFile
+Write
+a
+and
+be
+but
+can
+close
+enough
+file
+filename
+fstream
+fun
+include
+int
+iostream
+is
+it
+main
+namespace
+ofstream
+open
+std
+text
+the
+to
+tricky
+txt
+using
+```
+
+### Задача 5
+***chmod -x*** - выдача прав доступа
+
+***cp*** - копирование файла
+
+```
+#!/bin/bash
+chmod +x $1
+cp $1 /usr/local/bin
+
+```
+
