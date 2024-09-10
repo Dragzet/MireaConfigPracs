@@ -109,4 +109,20 @@ digraph G {
 
 ### Задание 4
 
-Для того
+```
+include "globals.mzn";
+
+array[1..6] of var 0..9: numbers;
+constraint all_different(numbers);
+
+var int: FirstSum = sum(numbers[1..3]);
+constraint FirstSum == sum(numbers[4..6]);
+
+solve minimize FirstSum;
+
+output ["Билет - ", show(numbers), " Сумма 3х цифр - ", show(FirstSum)];
+```
+
+### Задание 5
+
+
