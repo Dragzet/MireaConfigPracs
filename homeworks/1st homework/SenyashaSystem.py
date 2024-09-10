@@ -72,6 +72,8 @@ class System:
             return "Error: File doesn't exist"
         if target[-1] == "/":
             return "Error: Cannot copy dir"
+        if targetPath[-1] != "/":
+            targetPath += '/'
 
         tempZip = self.zipfilePath + ".tmp" # Создаем временный файлиу
 
