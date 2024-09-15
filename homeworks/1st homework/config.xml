@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <file_system>
-        <path>test.zip</path>
+        <path>OS/need.zip</path>
     </file_system>
     <startup_script>
         <path>start.txt</path>

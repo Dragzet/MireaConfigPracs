@@ -47,10 +47,10 @@ class System:
         return
 
     def rm(self, target):
-        if not self.isExist(target): # Есть ли такой файл в локальном пути?
-            return "Error: No such file"
         if target[-1] == "/": # Точно ли это не директория?
             return "Error: Can't remove directory"
+        if not self.isExist(target): # Есть ли такой файл в локальном пути?
+            return "Error: No such file"
 
         tempZip = self.zipfilePath + ".tmp" # Создаем временный файл для записи
 
@@ -66,12 +66,13 @@ class System:
         self.zipfile = zipfile.ZipFile(self.zipfilePath)
 
     def cp(self, target, targetPath):
-        if not self.isDirExist(targetPath): # Есть ли такая директория во всей ОС?
-            return "Error: Dir doesn't exist"
-        if not self.isExist(target): # Есть ли такой файл в локальном пути?
-            return "Error: File doesn't exist"
         if target[-1] == "/":
             return "Error: Cannot copy dir"
+        if not self.isExist(target): # Есть ли такой файл в локальном пути?
+            return "Error: File doesn't exist"
+        if not self.isDirExist(targetPath): # Есть ли такая директория во всей ОС?
+            return "Error: Dir doesn't exist"
+
         if targetPath[-1] != "/":
             targetPath += '/'
 
