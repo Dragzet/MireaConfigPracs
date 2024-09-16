@@ -1,7 +1,7 @@
 import shutil
 import unittest
 import zipfile
-from SenyashaSystem import System
+from TestSystem import System
 
 class TestSystem(unittest.TestCase):
 

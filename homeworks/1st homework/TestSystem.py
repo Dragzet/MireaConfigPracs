@@ -1,39 +1,15 @@
 import os
 import zipfile
-from tkinter import scrolledtext
-import tkinter as tk
+
 
 class System:
 
     USER = "SENYASHA"
 
-    def __init__(self, path, zipfile, zipfilePath, root):
+    def __init__(self, path, zipfile, zipfilePath):
         self.path = path # Текущее положение
         self.zipfile = zipfile # ОС
         self.zipfilePath = zipfilePath # Путь к ОС
-        self.root = root
-
-        self.output_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=60, height=15)
-        self.output_area.grid(row=0, column=0, padx=10, pady=10)
-        self.output_area.config(state=tk.DISABLED)
-        self.output_area.config(state=tk.NORMAL)
-        self.output_area.insert(tk.END, "\n" + self.USER + (" ~\n$ " if self.path == "" else f" {self.path}\n$ "))
-        self.output_area.yview(tk.END)
-        self.output_area.config(state=tk.DISABLED)
-
-        self.input_field = tk.Entry(root, width=40)
-        self.input_field.grid(row=1, column=0, padx=10, pady=10)
-        self.input_field.bind("<Return>", self.handle_input)
-
-
-    def handle_input(self, event=None):
-        user_input = self.input_field.get()
-        self.input_field.delete(0, tk.END)
-
-        if user_input == "exit":
-            self.root.quit()
-        else:
-            self.process(user_input)
 
     def ls(self):
         result = []
@@ -118,47 +94,37 @@ class System:
         os.rename(tempZip, self.zipfilePath)
         self.zipfile = zipfile.ZipFile(self.zipfilePath)
 
-    def process(self, command):
-        self.output_area.config(state=tk.NORMAL)
-        self.output_area.insert(tk.END, command)
-        inputLine = command.split()
-        #result = "\n" + self.USER + (" ~\n$ " if self.path == "" else f" {self.path}\n$ ")
-        result = "\n"
-        match inputLine[0]:
+    def start(self):
+        inputLine = input("\n" + self.USER + (" ~\n$ " if self.path == "" else f" {self.path}\n$ "))
 
-            case "ls":
-                result += "".join([f"{i}\n" for i in self.ls()])
-            case "cd":
-                if len(inputLine) != 2:
-                    result += "Error: Unknown command"
-                else:
-                    error = self.cd(inputLine[1])
-                    if error:
-                        result = error
-                        print(error)
-            case "rm":
-                if len(inputLine) != 2:
-                    result += "Error: Unknown command"
-                else:
-                    error = self.rm(inputLine[1])
-                    if error:
-                        result += error
-            case "cp":
-                if len(inputLine) != 3:
-                    result += "Error: Unknown command"
-                else:
-                    error = self.cp(inputLine[1], inputLine[2])
-                    if error:
-                        result += error
-            case _:
-                result += "Error: Unknown command"
+        while inputLine != "exit":
+            inputLine = inputLine.split()
 
-        # Выводим результат в текстовое поле
-        self.output_area.config(state=tk.NORMAL)
-        self.output_area.insert(tk.END, result)
-        self.output_area.yview(tk.END)  # Прокручиваем к концу
-        self.output_area.config(state=tk.DISABLED)
-        self.output_area.config(state=tk.NORMAL)
-        self.output_area.insert(tk.END, "\n" + self.USER + (" ~\n$ " if self.path == "" else f" {self.path}\n$ "))
-        self.output_area.yview(tk.END)  # Прокручиваем к концу
-        self.output_area.config(state=tk.DISABLED)
+            match inputLine[0]:
+                case "ls":
+                    [print(i) for i in self.ls()]
+                case "cd":
+                    if len(inputLine) != 2:
+                        print("Error: Unknown command")
+                    else:
+                        error = self.cd(inputLine[1])
+                        if error:
+                            print(error)
+                case "rm":
+                    if len(inputLine) != 2:
+                        print("Error: Unknown command")
+                    else:
+                        error = self.rm(inputLine[1])
+                        if error:
+                            print(error)
+                case "cp":
+                    if len(inputLine) != 3:
+                        print("Error: Unknown command")
+                    else:
+                        error = self.cp(inputLine[1], inputLine[2])
+                        if error:
+                            print(error)
+                case _:
+                    print("Error: Unknown command")
+
+            inputLine = input("\n" + self.USER + (" ~\n$ " if self.path == "" else f" {self.path}\n$ "))
