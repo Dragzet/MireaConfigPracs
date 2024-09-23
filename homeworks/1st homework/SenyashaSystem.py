@@ -60,14 +60,16 @@ class System:
         return False
 
     def cd(self, target_directory):
-        if target_directory == "..": # Идем к корню
-            self.path = ""
-            return
-        if target_directory[-1] != "/": # Обрабатываем случаи, когда приходит Sys вместо Sys/
-            target_directory += "/"
-        if not self.isExist(target_directory): # Есть ли в локальном пути такая папка??
-            return "Error: Unknown dir"
-        self.path = self.path + target_directory
+        targets = target_directory.split()[-1].split("/")
+        for target in targets:
+            if target == "..":  # Идем к корню
+                self.path = ""
+                continue
+            if target[-1] != "/":  # Обрабатываем случаи, когда приходит Sys вместо Sys/
+                target += "/"
+            if not self.isExist(target):  # Есть ли в локальном пути такая папка??
+                return "Error: Unknown dir"
+            self.path = self.path + target
         return
 
     def rm(self, target):
