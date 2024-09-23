@@ -6,10 +6,8 @@ from TestSystem import System
 class TestSystem(unittest.TestCase):
 
     def setUp(self):
-
         self.zipfilePathOriginal = 'testData/test_archive.zip'
         self.zipfilePathTmp = 'testData/test_archive.zip.tmp'
-
         self.makeCopy()
 
     def makeCopy(self):

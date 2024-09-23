@@ -62,8 +62,12 @@ class System:
     def cd(self, target_directory):
         targets = target_directory.split()[-1].split("/")
         for target in targets:
-            if target == "..":  # Идем к корню
+            if len(target) == 0: return "Error: Unknown dir"
+            if target == ".." and self.path.count("/") <= 1:  # Идем к корню
                 self.path = ""
+                continue
+            if target == "..":
+                self.path = self.path[:self.path[:-2].rfind("/")] + "/"
                 continue
             if target[-1] != "/":  # Обрабатываем случаи, когда приходит Sys вместо Sys/
                 target += "/"

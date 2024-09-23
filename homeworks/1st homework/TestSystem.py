@@ -38,12 +38,15 @@ class System:
     def cd(self, target_directory):
         targets = target_directory.split()[-1].split("/")
         for target in targets:
-            if target == "..": # Идем к корню
+            if len(target) == 0: continue
+            if target == ".." and self.path.count("/") <= 1: # Идем к корню
                 self.path = ""
+                continue
+            if target == "..":
+                self.path = self.path[:self.path[:-2].rfind("/")] + "/"
                 continue
             if target[-1] != "/": # Обрабатываем случаи, когда приходит Sys вместо Sys/
                 target += "/"
-
             if not self.isExist(target): # Есть ли в локальном пути такая папка??
                 return "Error: Unknown dir"
             self.path = self.path + target
