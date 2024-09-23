@@ -125,4 +125,110 @@ output ["Билет - ", show(numbers), " Сумма 3х цифр - ", show(Firs
 
 ### Задание 5
 
+```
+set of int: MenuVersions = 1..6;
+set of int: DropdownVersions = 1..5;
+set of int: IconVersions = 1..2;
 
+array[MenuVersions] of int: menu = [150, 140, 130, 120, 110, 100];
+array[DropdownVersions] of int: dropdown = [230, 220, 210, 200, 180];
+array[IconVersions] of int: icons = [200, 100];
+
+var MenuVersions: selected_menu;
+var DropdownVersions: selected_dropdown;
+var IconVersions: selected_icons;
+
+constraint
+    (selected_menu = 1 -> selected_dropdown in 1..3) /\
+    (selected_menu = 2 -> selected_dropdown in 2..4) /\
+    (selected_menu = 3 -> selected_dropdown in 3..5) /\
+    (selected_menu = 4 -> selected_dropdown in 4..5) /\
+    (selected_menu = 5 -> selected_dropdown = 5) /\
+    (selected_dropdown = 1 -> selected_icons = 1) /\
+    (selected_dropdown = 2 -> selected_icons in 1..2) /\
+    (selected_dropdown = 3 -> selected_icons in 1..2) /\
+    (selected_dropdown = 4 -> selected_icons in 1..2) /\
+    (selected_dropdown = 5 -> selected_icons in 1..2);
+
+solve satisfy;
+
+output [
+    "Selected menu version: \(menu[selected_menu])\n",
+    "Selected dropdown version: \(dropdown[selected_dropdown])\n",
+    "Selected icon version: \(icons[selected_icons])\n"
+];
+```
+
+***Вывод:***
+
+![image](https://github.com/user-attachments/assets/ff4f235f-9a98-49ef-bfce-cadf5add1adb)
+
+
+### Задание 6
+
+```
+set of int: FooVersions = 1..2;
+set of int: LeftVersions = 1..1;
+set of int: RightVersions = 1..1;
+set of int: SharedVersions = 1..2;
+set of int: TargetVersions = 1..2;
+set of int: RootVersions = 1..1; 
+
+var FooVersions: selected_foo;
+var LeftVersions: selected_left;
+var RightVersions: selected_right;
+var SharedVersions: selected_shared;
+var TargetVersions: selected_target;
+var RootVersions: selected_root;
+
+constraint selected_root = 1;
+constraint selected_foo = 1;
+constraint selected_target = 2;
+constraint selected_left = 1;
+constraint selected_right = 1;
+constraint selected_shared >= 1;
+constraint selected_shared < 2;
+
+solve satisfy;
+
+output [
+  "Версия foo: ", show(selected_foo),".0.0", "\n",
+  "Версия left: ", show(selected_left),".0.0", "\n",
+  "Версия right: ", show(selected_right),".0.0", "\n",
+  "Версия shared: ", show(selected_shared),".0.0", "\n",
+  "Версия target: ", show(selected_target),".0.0", "\n",
+  "Версия root: ", show(selected_root),".0.0", "\n"
+];
+```
+
+***Вывод:***
+
+![image](https://github.com/user-attachments/assets/ee75f537-2c28-4d90-81c8-910725165a3a)
+
+### Задание 7
+
+```
+int: num_packages;
+
+set of int: Packages = 1..num_packages;
+
+array[Packages] of set of int: Versions;
+
+array[Packages] of var int: selected_version;
+
+array[Packages] of set of int: dependencies;
+
+array[Packages, Packages] of int: min_version;
+
+array[Packages, Packages] of int: max_version;
+
+constraint
+  forall(i in Packages) (
+    forall(dep in dependencies[i]) (
+      selected_version[dep] >= min_version[i, dep] /\
+      selected_version[dep] <= max_version[i, dep]
+    )
+  );
+
+solve satisfy;
+```
