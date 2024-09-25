@@ -130,6 +130,8 @@ class System:
         inputLine = command.split()
         #result = "\n" + self.USER + (" ~\n$ " if self.path == "" else f" {self.path}\n$ ")
         result = "\n"
+        if len(inputLine) == 0:
+            inputLine = " "
         match inputLine[0]:
 
             case "ls":
