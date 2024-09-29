@@ -1,9 +1,12 @@
-.PHONY: run, depends
+.PHONY: run depends tests
 
 run:
-	python3 main.py
+	python main.py
 
 depends:
 	pip install -r reqs.txt
 
-.DEFAULT: run
+tests:
+	python -m unittest discover tests
+
+.DEFAULT_GOAL := run
