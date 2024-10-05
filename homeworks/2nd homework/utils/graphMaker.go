@@ -45,7 +45,7 @@ func (g *GraphMake) GetFileHashInCommit(commit, filePath, repoPath string) (stri
 	}
 	parts := strings.Split(string(output), " ")
 	if len(parts) < 3 {
-		return "", fmt.Errorf("unexpected ls-tree output: %s", output)
+		return "", fmt.Errorf("С деревом что то не так: %s", output)
 	}
 	return strings.TrimSpace(parts[2]), nil
 }
