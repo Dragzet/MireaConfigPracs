@@ -74,10 +74,10 @@ E =  | ( E ) | { E } | E E
 BNF = """
 <expression> = <term> | <open> <term> <operation> <term> <close> | <negative> <open> <term> <operation> <term> <close> | <open> <expression> <operation> <expression> <close>| <negative> <open <expression> <close>
 <term> = <variable> | <negative> <variable> | <open> <variable> <operation> <variable> <close> | <negative> <open> <variable> <operation> <variable> <close>
-<variable> ::= x | y | z | w
-<operation> ::= & | V
-<negative> ::= ~
-<open> ::= (
-<close> ::= )
+<variable> = x | y | z | w
+<operation> = & | V
+<negative> = ~
+<open> = (
+<close> = )
 """
 ```
