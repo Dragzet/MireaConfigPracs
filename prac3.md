@@ -28,6 +28,9 @@ local studentData = [
 }
 ```
 
+![image](https://github.com/user-attachments/assets/ff63c624-d1e0-421a-b0c3-def1588eda58)
+
+
 ### Задача 2
 
 ```
