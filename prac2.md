@@ -126,106 +126,113 @@ output ["Билет - ", show(numbers), " Сумма 3х цифр - ", show(Firs
 ### Задание 5
 
 ```
-set of int: MenuVersions = 1..6;
-set of int: DropdownVersions = 1..5;
-set of int: IconVersions = 1..2;
+int: menu_count = 6;
+int: dropdown_count = 5;
+int: icons_count = 2;
 
-array[MenuVersions] of int: menu = [150, 140, 130, 120, 110, 100];
-array[DropdownVersions] of int: dropdown = [230, 220, 210, 200, 180];
-array[IconVersions] of int: icons = [200, 100];
+array[1..menu_count] of tuple(int, int, int): menu_versions = 
+  [(1,0,0), (1,1,0), (1,2,0), (1,3,0), (1,4,0), (1,5,0)];
 
-var MenuVersions: selected_menu;
-var DropdownVersions: selected_dropdown;
-var IconVersions: selected_icons;
+array[1..dropdown_count] of tuple(int, int, int): dropdown_versions = 
+  [(1,8,0), (2,0,0), (2,1,0), (2,2,0), (2,3,0)];
 
-constraint
-    (selected_menu = 1 -> selected_dropdown in 1..3) /\
-    (selected_menu = 2 -> selected_dropdown in 2..4) /\
-    (selected_menu = 3 -> selected_dropdown in 3..5) /\
-    (selected_menu = 4 -> selected_dropdown in 4..5) /\
-    (selected_menu = 5 -> selected_dropdown = 5) /\
-    (selected_dropdown = 1 -> selected_icons = 1) /\
-    (selected_dropdown = 2 -> selected_icons in 1..2) /\
-    (selected_dropdown = 3 -> selected_icons in 1..2) /\
-    (selected_dropdown = 4 -> selected_icons in 1..2) /\
-    (selected_dropdown = 5 -> selected_icons in 1..2);
+array[1..icons_count] of tuple(int, int, int): icons_versions = 
+  [(1,0,0), (2,0,0)];
+
+tuple(int, int, int): root_version = (1,0,0);
+  
+var 1..menu_count: menu;
+var 1..dropdown_count: dropdown;
+var 1..icons_count: icons;
+
+constraint (menu_versions[menu] == (1,0,0) \/ menu_versions[menu] == (1, 5, 0) /\ icons_versions[icons] == (1, 0, 0));
+
+constraint (menu_versions[menu].2 >= 1 /\ menu_versions[menu].2 <= 5) -> (dropdown_versions[dropdown] == (2, 3, 0) \/ dropdown_versions[dropdown] == (2, 0, 0));
+
+constraint menu_versions[menu] == (1, 0, 0) -> dropdown_versions[dropdown] == (1, 8, 0);
+
+constraint (dropdown_versions[dropdown].2 >= 0 /\ dropdown_versions[dropdown].2 <= 3) -> icons_versions[icons] == (2, 0, 0);
 
 solve satisfy;
 
 output [
-    "Selected menu version: \(menu[selected_menu])\n",
-    "Selected dropdown version: \(dropdown[selected_dropdown])\n",
-    "Selected icon version: \(icons[selected_icons])\n"
+  "Menu version: ", show(menu_versions[menu]), "\n",
+  "Dropdown version: ", show(dropdown_versions[dropdown]), "\n",
+  "Icons version: ", show(icons_versions[icons]), "\n"
 ];
 ```
 
 ***Вывод:***
 
-![image](https://github.com/user-attachments/assets/ff4f235f-9a98-49ef-bfce-cadf5add1adb)
-
+![image](https://github.com/user-attachments/assets/a09baf8b-d92a-4e0b-b327-d753d2a3e29d)
 
 ### Задание 6
 
 ```
-var 0..1: foo_min;
-var 1..9: foo_maj;
+int: foo_count = 2;
+int: left_count = 1;
+int: right_count = 1;
+int: shared_count = 2;
+int: target_count = 2;
 
-var 0..9: target_min;
-var 1..9: target_maj;
+array[1..foo_count] of tuple(int, int, int): foo_versions = 
+[(1,0,0), (1,1,0)];
 
-var 0..9: left_min;
-var 1..9: left_maj;
+array[1..left_count] of tuple(int, int, int): left_versions = 
+[(1,0,0)];
 
-var 0..9: right_min;
-var 1..9: right_maj;
+array[1..right_count] of tuple(int, int, int): right_versions = 
+[(1,0,0)];
 
-var 0..9: shared_min;
-var 1..9: shared_maj;
+array[1..shared_count] of tuple(int, int, int): shared_versions = 
+[(1,0,0), (2,0,0)];
 
-constraint foo_maj == 1;
+array[1..target_count] of tuple(int, int, int): target_versions = 
+[(1,0,0), (2,0,0)];
 
-constraint target_maj == 2;
+tuple(int, int, int): root_version = (1,0,0);
 
-constraint (
-if foo_min == 1
-then left_maj = 1 /\ right_maj = 1
-else true
-endif
-);
 
-constraint (
-if left_maj == 1
-then shared_maj >= 1
-else true
-endif
-);
+var 1..foo_count: foo;
+var 1..left_count: left;
+var 1..right_count: right;
+var 1..shared_count: shared;
+var 1..target_count: target;
 
-constraint (
-if right_maj == 1
-then shared_maj < 2
-else true
-endif
-);
 
-constraint (
-if shared_maj == 1
-then target_maj = 1
-else true
-endif
-);
+constraint (foo_versions[foo].1 == 1 /\ foo_versions[foo].2 >= 0) 
+/\ (target_versions[target].1 == 2 /\ target_versions[target].2 >= 0); 
+
+constraint foo_versions[foo] == (1, 1, 0) -> 
+(left_versions[left].1 == 1 /\ left_versions[left].2 >= 0) 
+/\ (right_versions[right].1 == 1 /\ right_versions[right].2 >= 0); 
+
+
+constraint left_versions[left] == (1, 0, 0) ->
+(shared_versions[shared].1 >= 1);
+
+constraint right_versions[right] == (1, 0, 0) ->
+(shared_versions[shared].1 < 2);
+
+constraint shared_versions[shared] == (1, 0, 0) ->
+(target_versions[target].1 == 1 /\ target_versions[target].2 >= 0);
+
+solve satisfy;
 
 output [
-"foo ", show(foo_maj), ".", show(foo_min), ".0\n",
-"target ", show(target_maj), ".", show(target_min), ".0\n",
-"left ", show(left_maj), ".", show(left_min), ".0\n",
-"right ", show(right_maj), ".", show(right_min), ".0\n",
-"shared ", show(shared_maj), ".", show(shared_min), ".0"
+"Root version: ", show(root_version), "\n",
+"Foo version: ", show(foo_versions[foo]), "\n",
+"Left version: ", show(left_versions[left]), "\n",
+"Right version: ", show(right_versions[right]), "\n",
+"Shared version: ", show(shared_versions[shared]), "\n",
+"Target version: ", show(target_versions[target]), "\n"
 ];
 ```
 
 ***Вывод:***
 
-![image](https://github.com/user-attachments/assets/a140337e-1ae9-43ec-8963-e1a45c71a223)
+![image](https://github.com/user-attachments/assets/703fd759-61f9-4e45-b48d-c9fe6151b5e4)
+
 
 
 ### Задание 7
