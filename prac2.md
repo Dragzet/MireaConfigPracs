@@ -167,43 +167,66 @@ output [
 ### Задание 6
 
 ```
-set of int: FooVersions = 1..2;
-set of int: LeftVersions = 1..1;
-set of int: RightVersions = 1..1;
-set of int: SharedVersions = 1..2;
-set of int: TargetVersions = 1..2;
-set of int: RootVersions = 1..1; 
+var 0..1: foo_min;
+var 1..9: foo_maj;
 
-var FooVersions: selected_foo;
-var LeftVersions: selected_left;
-var RightVersions: selected_right;
-var SharedVersions: selected_shared;
-var TargetVersions: selected_target;
-var RootVersions: selected_root;
+var 0..9: target_min;
+var 1..9: target_maj;
 
-constraint selected_root = 1;
-constraint selected_foo = 1;
-constraint selected_target = 2;
-constraint selected_left = 1;
-constraint selected_right = 1;
-constraint selected_shared >= 1;
-constraint selected_shared < 2;
+var 0..9: left_min;
+var 1..9: left_maj;
 
-solve satisfy;
+var 0..9: right_min;
+var 1..9: right_maj;
+
+var 0..9: shared_min;
+var 1..9: shared_maj;
+
+constraint foo_maj == 1;
+
+constraint target_maj == 2;
+
+constraint (
+if foo_min == 1
+then left_maj = 1 /\ right_maj = 1
+else true
+endif
+);
+
+constraint (
+if left_maj == 1
+then shared_maj >= 1
+else true
+endif
+);
+
+constraint (
+if right_maj == 1
+then shared_maj < 2
+else true
+endif
+);
+
+constraint (
+if shared_maj == 1
+then target_maj = 1
+else true
+endif
+);
 
 output [
-  "Версия foo: ", show(selected_foo),".0.0", "\n",
-  "Версия left: ", show(selected_left),".0.0", "\n",
-  "Версия right: ", show(selected_right),".0.0", "\n",
-  "Версия shared: ", show(selected_shared),".0.0", "\n",
-  "Версия target: ", show(selected_target),".0.0", "\n",
-  "Версия root: ", show(selected_root),".0.0", "\n"
+"foo ", show(foo_maj), ".", show(foo_min), ".0\n",
+"target ", show(target_maj), ".", show(target_min), ".0\n",
+"left ", show(left_maj), ".", show(left_min), ".0\n",
+"right ", show(right_maj), ".", show(right_min), ".0\n",
+"shared ", show(shared_maj), ".", show(shared_min), ".0"
 ];
 ```
 
 ***Вывод:***
 
-![image](https://github.com/user-attachments/assets/ee75f537-2c28-4d90-81c8-910725165a3a)
+![image](https://github.com/user-attachments/assets/a140337e-1ae9-43ec-8963-e1a45c71a223)
+
 
 ### Задание 7
 
