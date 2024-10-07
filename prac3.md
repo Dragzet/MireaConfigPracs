@@ -60,6 +60,8 @@ E = 0 | 1 | 0 E | 1 E
 '''
 ```
 
+![image](https://github.com/user-attachments/assets/afcd64a9-e7d1-449e-a549-4d89748bd121)
+
 ### Задача 4
 
 ```python
@@ -67,6 +69,9 @@ BNF = '''
 E =  | ( E ) | { E } | E E
 '''
 ```
+
+![image](https://github.com/user-attachments/assets/7b97a969-98a5-4a27-8dc5-822a22e64cf5)
+
 
 ### Задача 5
 
