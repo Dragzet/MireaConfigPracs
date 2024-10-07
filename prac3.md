@@ -7,9 +7,9 @@ local year = '-23';
 local groupNum = std.range(1, 10);
 
 local studentData = [
-  {name: "Коротков А. А.", age: 52, groupIndex: 3},
-  {name: "Жагло И. Д.", age: 20, groupIndex: 2},
-  {name: "Запрягаев М. А.", age: 19, groupIndex: 1},
+  {name: "Антонов А. А.", age: 22, groupIndex: 3},
+  {name: "Станислв И. Д.", age: 20, groupIndex: 2},
+  {name: "Кириленко М. А.", age: 19, groupIndex: 1},
   {name: "Харитонов А.Н.", age: 18, groupIndex: 4}
 ];
 
