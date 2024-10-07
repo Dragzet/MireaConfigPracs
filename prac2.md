@@ -164,7 +164,8 @@ output [
 
 ***Вывод:***
 
-![image](https://github.com/user-attachments/assets/a09baf8b-d92a-4e0b-b327-d753d2a3e29d)
+![image](https://github.com/user-attachments/assets/07c18fee-6774-44b8-9dc2-3cf9740b4299)
+
 
 ### Задание 6
 
@@ -231,7 +232,8 @@ output [
 
 ***Вывод:***
 
-![image](https://github.com/user-attachments/assets/703fd759-61f9-4e45-b48d-c9fe6151b5e4)
+![image](https://github.com/user-attachments/assets/644c5681-29a7-42ea-aaeb-632674b958ad)
+
 
 
 
