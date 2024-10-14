@@ -79,13 +79,14 @@ E =  | ( E ) | { E } | E E
 ### Задача 5
 
 ```python
-BNF = """
-<expression> = <term> | <open> <term> <operation> <term> <close> | <negative> <open> <term> <operation> <term> <close> | <open> <expression> <operation> <expression> <close>| <negative> <open <expression> <close>
-<term> = <variable> | <negative> <variable> | <open> <variable> <operation> <variable> <close> | <negative> <open> <variable> <operation> <variable> <close>
-<variable> = x | y | z | w
-<operation> = & | V
-<negative> = ~
-<open> = (
-<close> = )
-"""
+BNF = '''
+E = ( E B F ) | U ( E ) | F
+F = P B P | U P | P
+P = x | y | (x) | (y)
+U = ~
+B = & | V
+'''
 ```
+
+![image](https://github.com/user-attachments/assets/4257e693-d660-4d96-a583-0e8bd9d3e3ea)
+
