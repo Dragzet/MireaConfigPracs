@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/65e53c60-2282-4526-b486-2ead649e5c97)## Задание 0
+## Задание 0
 
 ![image](https://github.com/user-attachments/assets/a3117572-359c-4d37-99f1-1504d84b7e21)
 
@@ -226,4 +226,5 @@ clean:
 ```
 
 ![image](https://github.com/user-attachments/assets/4dabf487-14ce-4536-b7eb-638e19743983)
+
 
