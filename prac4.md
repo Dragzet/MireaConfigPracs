@@ -228,5 +228,3 @@ clean:
 ![image](https://github.com/user-attachments/assets/4dabf487-14ce-4536-b7eb-638e19743983)
 
 
-![image](https://github.com/user-attachments/assets/65e53c60-2282-4526-b486-2ead649e5c97)
-
