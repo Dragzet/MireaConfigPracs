@@ -1,0 +1,26 @@
+<configuration>
+    <constant name="pi">-3.14</constant>
+    <constant name="e">2.71</constant>
+    <comment>Make array</comment>
+    <array>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+    </array>
+    <comment>Make Dict</comment>
+    <dictionary>
+        <num1>value1</num1>
+        <key2>value2</key2>
+    </dictionary>
+    <comment>e + 1</comment>
+    <expression>
+        <operator>+</operator>
+        <operand>e</operand>
+        <operand>1</operand>
+    </expression>
+    <comment>Print e</comment>
+    <expression>
+        <operator>print</operator>
+        <operand>pi</operand>
+    </expression>
+</configuration>

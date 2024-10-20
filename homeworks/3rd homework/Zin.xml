@@ -1,0 +1,23 @@
+<language>
+    <comment>Custon lang</comment>
+    <constant name="pi">-3.14</constant>
+    <constant name="e">2.71</constant>
+    <array>
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+    </array>
+    <dictionary>
+        <num1>value1</num1>
+        <key2>value2</key2>
+    </dictionary>
+    <expression>
+        <operator>+</operator>
+        <operand>pi</operand>
+        <operand>1</operand>
+    </expression>
+    <expression>
+        <operator>print</operator>
+        <operand>pi</operand>
+    </expression>
+</language>

@@ -1,0 +1,14 @@
+<configuration>
+    <comment>Print and Double PI</comment>
+    <constant name="pi">3.14</constant>
+    <constant name="e">2.71</constant>
+    <expression>
+        <operator>print</operator>
+        <operand>pi</operand>
+    </expression>
+    <expression>
+        <operator>+</operator>
+        <operand>pi</operand>
+        <operand>pi</operand>
+    </expression>
+</configuration>
