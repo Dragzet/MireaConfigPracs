@@ -187,7 +187,6 @@ if __name__ == '__main__':
 
 ```
 
-Сгенерированныый файл:
 
 ```make
 all: masonry early_empire pottery drama_poetry writing astrology code_of_laws foreign_trade irrigation currency sailing mysticism mining celestial_navigation bronze_working
