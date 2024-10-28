@@ -93,7 +93,7 @@ def generate_makefile(graph, targetTech):
             if target not in tasks:
                 allString += " " + target
                 tasks.add(target)
-                tempString = " ".join(graph[target])
+                tempString = " ".join([i for i in graph[target] if i not in tasks])
                 result_string += f'{target}: {tempString}\n'
                 result_string += f'\t@echo "Building {target}"\n\n'
         if result_string != "":
@@ -150,7 +150,7 @@ def generate_makefile(graph, targetTech):
             if target not in tasks:
                 allString += " " + target
                 tasks.add(target)
-                tempString = " ".join(graph[target])
+                tempString = " ".join([i for i in graph[target] if i not in tasks])
                 result_string += f'{target}: {tempString}\n'
                 result_string += f'\t@echo "Building {target}"\n\n'
         if result_string != "":
@@ -184,6 +184,7 @@ if __name__ == '__main__':
     else:
         generate_makefile(graph, target)
         print("Makefile создан.")
+
 ```
 
 Сгенерированныый файл:
