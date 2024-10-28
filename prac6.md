@@ -82,20 +82,25 @@ def get_all_depends(graph, targetTech):
             depends.add(i)
     return depends
 
-
 def generate_makefile(graph, targetTech):
     tasks = load_tasks()
     depends = get_all_depends(graph, targetTech)
     tasks.add(targetTech)
     with open('Makefile', 'w') as f:
         result_string = ""
+        allString = ""
         for target in depends:
             if target not in tasks:
+                allString += " " + target
                 tasks.add(target)
-                result_string += f'\t@echo "Building {target}"\n'
+                tempString = " ".join(graph[target])
+                result_string += f'{target}: {tempString}\n'
+                result_string += f'\t@echo "Building {target}"\n\n'
         if result_string != "":
-            f.write(f'{target}:\n')
+            allString+="\n\n"
+            f.write("all:" + allString)
             f.write(result_string)
+            f.write(".PHONY:" + allString)
     save_tasks(tasks)
 
 def load_tasks():
@@ -114,6 +119,7 @@ if __name__ == '__main__':
     target = input('Enter target: ')
     generate_makefile(graph, target)
     print("Makefile создан.")
+
 ```
 
 ![image](https://github.com/user-attachments/assets/9b35c3bc-99c0-44cb-8821-2bc45e706c67)
@@ -133,20 +139,25 @@ def get_all_depends(graph, targetTech):
             depends.add(i)
     return depends
 
-
 def generate_makefile(graph, targetTech):
     tasks = load_tasks()
     depends = get_all_depends(graph, targetTech)
     tasks.add(targetTech)
     with open('Makefile', 'w') as f:
         result_string = ""
+        allString = ""
         for target in depends:
             if target not in tasks:
+                allString += " " + target
                 tasks.add(target)
-                result_string += f'\t@echo "Building {target}"\n'
+                tempString = " ".join(graph[target])
+                result_string += f'{target}: {tempString}\n'
+                result_string += f'\t@echo "Building {target}"\n\n'
         if result_string != "":
-            f.write(f'{target}:\n')
+            allString+="\n\n"
+            f.write("all:" + allString)
             f.write(result_string)
+            f.write(".PHONY:" + allString)
     save_tasks(tasks)
 
 def load_tasks():
@@ -173,6 +184,60 @@ if __name__ == '__main__':
     else:
         generate_makefile(graph, target)
         print("Makefile создан.")
+```
+
+Сгенерированныый файл:
+
+```make
+all: masonry early_empire pottery drama_poetry writing astrology code_of_laws foreign_trade irrigation currency sailing mysticism mining celestial_navigation bronze_working
+
+masonry: mining
+	@echo "Building masonry"
+
+early_empire: foreign_trade
+	@echo "Building early_empire"
+
+pottery: 
+	@echo "Building pottery"
+
+drama_poetry: astrology irrigation masonry early_empire mysticism
+	@echo "Building drama_poetry"
+
+writing: pottery
+	@echo "Building writing"
+
+astrology: 
+	@echo "Building astrology"
+
+code_of_laws: 
+	@echo "Building code_of_laws"
+
+foreign_trade: code_of_laws
+	@echo "Building foreign_trade"
+
+irrigation: pottery
+	@echo "Building irrigation"
+
+currency: writing foreign_trade
+	@echo "Building currency"
+
+sailing: 
+	@echo "Building sailing"
+
+mysticism: foreign_trade
+	@echo "Building mysticism"
+
+mining: 
+	@echo "Building mining"
+
+celestial_navigation: sailing astrology
+	@echo "Building celestial_navigation"
+
+bronze_working: mining
+	@echo "Building bronze_working"
+
+.PHONY: masonry early_empire pottery drama_poetry writing astrology code_of_laws foreign_trade irrigation currency sailing mysticism mining celestial_navigation bronze_working
+
 ```
 
 ![image](https://github.com/user-attachments/assets/355b9321-852f-4758-824a-f6edb2b87fd4)
