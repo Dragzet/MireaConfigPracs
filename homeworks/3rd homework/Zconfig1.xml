@@ -2,6 +2,7 @@
     <comment>Print and Double PI</comment>
     <constant name="pi">3.14</constant>
     <constant name="e">2.71</constant>
+    <constant name="str">"202"</constant>
     <expression>
         <operator>print</operator>
         <operand>pi</operand>
