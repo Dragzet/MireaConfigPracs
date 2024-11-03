@@ -1,8 +1,9 @@
-.PHONY: run tests
+.PHONY: run test
 
 run:
-	go run main.go -repo=mux -output=files/output.md -file=files/input.txt
-tests:
-	cd utils && go test
+	python main.py RestaurantStorage target.txt output.md
+
+test:
+	python -m unittest main_test.py
 
 .DEFAULT_GOAL := run
