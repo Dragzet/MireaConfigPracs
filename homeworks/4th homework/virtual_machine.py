@@ -98,9 +98,9 @@ class VirtualMachine:
         B, C = struct.unpack('<BB', data)
         first = self.stack.pop()
         second = self.memory[first + B]
-        print(first, second, B)
+        # print(first, second, B)
         result = int(first == second)
-        print(result)
+        # print(result)
 
         self.stack.append(result)
 
